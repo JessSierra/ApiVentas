@@ -14,7 +14,7 @@ namespace ApiVentas.Controllers
 {
     public class ProductosController : ApiController
     {
-        private PuntoVentaEntities4 db = new PuntoVentaEntities4();
+        private PuntoVentaEntities5 db = new PuntoVentaEntities5();
 
         // GET: api/Productos
         public IQueryable<Productos> GetProductos()

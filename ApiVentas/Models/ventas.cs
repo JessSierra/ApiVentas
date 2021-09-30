@@ -18,6 +18,7 @@ namespace ApiVentas.Models
         public ventas()
         {
             this.DetalleVenta = new HashSet<DetalleVenta>();
+            this.Transacciones = new HashSet<Transacciones>();
         }
     
         public int IdCliente { get; set; }
@@ -28,5 +29,7 @@ namespace ApiVentas.Models
         public virtual Cliente Cliente { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DetalleVenta> DetalleVenta { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Transacciones> Transacciones { get; set; }
     }
 }

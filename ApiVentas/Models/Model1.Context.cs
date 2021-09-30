@@ -13,10 +13,10 @@ namespace ApiVentas.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class PuntoVentaEntities4 : DbContext
+    public partial class PuntoVentaEntities5 : DbContext
     {
-        public PuntoVentaEntities4()
-            : base("name=PuntoVentaEntities4")
+        public PuntoVentaEntities5()
+            : base("name=PuntoVentaEntities5")
         {
         }
     

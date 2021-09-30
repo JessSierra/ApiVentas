@@ -39,6 +39,7 @@
           </Key>
           <Property Name="fecha" Type="datetime" Nullable="false" />
           <Property Name="IdTransaccion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdVenta" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="ventas">
           <Key>
@@ -57,6 +58,18 @@
               <PropertyRef Name="IdVenta" />
             </Principal>
             <Dependent Role="DetalleVenta">
+              <PropertyRef Name="IdVenta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Transacci__IdVen__3C69FB99">
+          <End Role="ventas" Type="Self.ventas" Multiplicity="1" />
+          <End Role="Transacciones" Type="Self.Transacciones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ventas">
+              <PropertyRef Name="IdVenta" />
+            </Principal>
+            <Dependent Role="Transacciones">
               <PropertyRef Name="IdVenta" />
             </Dependent>
           </ReferentialConstraint>
@@ -82,6 +95,10 @@
           <AssociationSet Name="FK__DetalleVe__IdVen__38996AB5" Association="Self.FK__DetalleVe__IdVen__38996AB5">
             <End Role="ventas" EntitySet="ventas" />
             <End Role="DetalleVenta" EntitySet="DetalleVenta" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Transacci__IdVen__3C69FB99" Association="Self.FK__Transacci__IdVen__3C69FB99">
+            <End Role="ventas" EntitySet="ventas" />
+            <End Role="Transacciones" EntitySet="Transacciones" />
           </AssociationSet>
           <AssociationSet Name="FK__ventas__IdClient__36B12243" Association="Self.FK__ventas__IdClient__36B12243">
             <End Role="Cliente" EntitySet="Cliente" />
@@ -129,6 +146,8 @@
           </Key>
           <Property Name="fecha" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="IdTransaccion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdVenta" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ventas" Relationship="Self.FK__Transacci__IdVen__3C69FB99" FromRole="Transacciones" ToRole="ventas" />
         </EntityType>
         <EntityType Name="ventas">
           <Key>
@@ -140,6 +159,7 @@
           <Property Name="IdVenta" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <NavigationProperty Name="Cliente" Relationship="Self.FK__ventas__IdClient__36B12243" FromRole="ventas" ToRole="Cliente" />
           <NavigationProperty Name="DetalleVenta" Relationship="Self.FK__DetalleVe__IdVen__38996AB5" FromRole="ventas" ToRole="DetalleVenta" />
+          <NavigationProperty Name="Transacciones" Relationship="Self.FK__Transacci__IdVen__3C69FB99" FromRole="ventas" ToRole="Transacciones" />
         </EntityType>
         <Association Name="FK__ventas__IdClient__36B12243">
           <End Role="Cliente" Type="Self.Cliente" Multiplicity="1" />
@@ -165,7 +185,19 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="PuntoVentaEntities4" annotation:LazyLoadingEnabled="true">
+        <Association Name="FK__Transacci__IdVen__3C69FB99">
+          <End Role="ventas" Type="Self.ventas" Multiplicity="1" />
+          <End Role="Transacciones" Type="Self.Transacciones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ventas">
+              <PropertyRef Name="IdVenta" />
+            </Principal>
+            <Dependent Role="Transacciones">
+              <PropertyRef Name="IdVenta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="PuntoVentaEntities5" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Cliente" EntityType="Self.Cliente" />
           <EntitySet Name="DetalleVenta" EntityType="Self.DetalleVenta" />
           <EntitySet Name="Productos" EntityType="Self.Productos" />
@@ -179,13 +211,17 @@
             <End Role="ventas" EntitySet="ventas" />
             <End Role="DetalleVenta" EntitySet="DetalleVenta" />
           </AssociationSet>
+          <AssociationSet Name="FK__Transacci__IdVen__3C69FB99" Association="Self.FK__Transacci__IdVen__3C69FB99">
+            <End Role="ventas" EntitySet="ventas" />
+            <End Role="Transacciones" EntitySet="Transacciones" />
+          </AssociationSet>
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="PuntoVentaModelStoreContainer" CdmEntityContainer="PuntoVentaEntities4">
+        <EntityContainerMapping StorageEntityContainer="PuntoVentaModelStoreContainer" CdmEntityContainer="PuntoVentaEntities5">
           <EntitySetMapping Name="Cliente">
             <EntityTypeMapping TypeName="PuntoVentaModel.Cliente">
               <MappingFragment StoreEntitySet="Cliente">
@@ -222,6 +258,7 @@
               <MappingFragment StoreEntitySet="Transacciones">
                 <ScalarProperty Name="fecha" ColumnName="fecha" />
                 <ScalarProperty Name="IdTransaccion" ColumnName="IdTransaccion" />
+                <ScalarProperty Name="IdVenta" ColumnName="IdVenta" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

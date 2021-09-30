@@ -16,5 +16,8 @@ namespace ApiVentas.Models
     {
         public System.DateTime fecha { get; set; }
         public int IdTransaccion { get; set; }
+        public int IdVenta { get; set; }
+    
+        public virtual ventas ventas { get; set; }
     }
 }
